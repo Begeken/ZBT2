@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZBT COIN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>ZBT COIN</h1>
+    <button id="farmButton" class="button" onclick="startFarming()">Farming</button>
+
+    <script>
+        function startFarming() {
+            const farmButton = document.getElementById('farmButton');
+            farmButton.disabled = true;
+            farmButton.textContent = "You started farming, your rewards will be delivered...";
+            fetch('/start-farming', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: Telegram.WebApp.initDataUnsafe.user.id }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                farmButton.textContent = "Farming started!";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                farmButton.disabled = false;
+                farmButton.textContent = "Farming";
+            });
+        }
+
+        Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
