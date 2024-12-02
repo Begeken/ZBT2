@@ -23,3 +23,11 @@ h1 {
 .button:disabled {
     background-color: #ccc;
 }
+
+/* Görsel stilini ekleyin */
+.game-image {
+    margin: 20px;
+    width: 200px;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+}
